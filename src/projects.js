@@ -1,4 +1,4 @@
-import { createToDo } from "./todos";
+import { createTodo } from "./todos";
 
 export const createProject = (projectTitle) => {
     const id = String(Math.floor(Math.random()*1000000000))
@@ -9,11 +9,12 @@ export const createProject = (projectTitle) => {
 
     const getTitle = () => projectTitle;
 
-    const getToDoList = () => todoList;
+    const getAllTodos = () => todoList;
 
-    const addToDo = (title, description, dueDate, priority, notes) => {
-        const toDo = createToDo(title, description, dueDate, priority, notes);
-        todoList.push(toDo);
+    const addTodo = (title, description, dueDate, priority, notes) => {
+        const newTodo = createTodo(title, description, dueDate, priority, notes);
+        todoList.push(newTodo);
+        return newTodo.getID();
     }
 
     const printProject = () => {
@@ -22,10 +23,21 @@ export const createProject = (projectTitle) => {
             ID: ${id}
             \n
             `);
-        todoList.forEach(toDo => {
-            toDo.printToDo();
+        todoList.forEach(todo => {
+            todo.printTodo();
         });
     }
 
-    return {getID, getTitle, getToDoList, addToDo, printProject};
+    const getTodoByID = (id) =>{
+        return todoList.find(todo => todo.getID() == id);
+    }
+
+    const deleteTodo = (id) => {
+        const toDelete = getTodoByID(id);
+        if(toDelete){
+            todoList.splice(todoList.indexOf(toDelete),1);
+        }
+    }
+
+    return {getID, getTitle, getAllTodos, addTodo, printProject, getTodoByID, deleteTodo};
 }

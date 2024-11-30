@@ -1,4 +1,4 @@
-export const createToDo = (title, description, dueDate, priority, notes) => {
+export const createTodo = (title, description, dueDate, priority, notes) => {
     
     const id = String(Math.floor(Math.random()*1000000000))
     
@@ -9,7 +9,7 @@ export const createToDo = (title, description, dueDate, priority, notes) => {
     const getPriority = () =>  priority;
     const getNotes = () =>  notes;
 
-    const printToDo = () => {
+    const printTodo = () => {
         console.log(`
             ID: ${id}
             Title: ${title}
@@ -20,5 +20,5 @@ export const createToDo = (title, description, dueDate, priority, notes) => {
             `);
     }
 
-    return {getID, getTitle, getDescription, getDueDate, getPriority, getNotes, printToDo};
+    return {getID, getTitle, getDescription, getDueDate, getPriority, getNotes, printTodo};
 }
