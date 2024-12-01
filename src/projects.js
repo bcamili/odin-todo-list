@@ -9,10 +9,12 @@ export const createProject = (projectTitle) => {
 
     const getTitle = () => projectTitle;
 
+    const setTitle = (newTitle) => projectTitle = newTitle;
+
     const getAllTodos = () => todoList;
 
     const addTodo = (title, description, dueDate, priority, notes) => {
-        const newTodo = createTodo(title, description, dueDate, priority, notes);
+        const newTodo = createTodo(id, title, description, dueDate, priority, notes);
         todoList.push(newTodo);
         return newTodo.getID();
     }
@@ -39,5 +41,5 @@ export const createProject = (projectTitle) => {
         }
     }
 
-    return {getID, getTitle, getAllTodos, addTodo, printProject, getTodoByID, deleteTodo};
+    return {getID, getTitle, setTitle, getAllTodos, addTodo, printProject, getTodoByID, deleteTodo};
 }

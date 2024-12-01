@@ -34,5 +34,23 @@ export const projectHandler = (function () {
         getProjectByID(projectID).deleteTodo(todoID);
     }
 
-    return {getAllProjects, printAllProjects, addProject, getProjectByID, deleteTodoInProject, addTodoToProject};
+    const editProject = (projectID,newTitle)=>{
+        getProjectByID(projectID).setTitle(newTitle);
+    }
+
+    const editTodoInProject = (projectID, todoID, edits)=>{
+        const todo = getProjectByID(projectID).getTodoByID(todoID);
+        for(const edit in edits){
+            todo.editTodo[edit](edits[edit]);
+        }
+    }
+
+    const deleteProject = (projectID) =>{
+        const toDelete = getProjectByID(projectID);
+        if(toDelete){
+            projects.splice(projects.indexOf(toDelete),1);
+        }
+    }
+
+    return {getAllProjects, printAllProjects, addProject, getProjectByID, deleteTodoInProject, addTodoToProject, editProject, editTodoInProject, deleteProject};
 })();
