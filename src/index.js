@@ -1,5 +1,6 @@
+import "./style.css";
 import { projectHandler } from "./projectHandler";
-
+import { renderProject } from "./projectRenderer";
 //Getting all Projects and Todos
 projectHandler.printAllProjects();
 
@@ -21,8 +22,8 @@ projectHandler.addTodoToProject(project2ID, "Test4", "test4", new Date(), 4, "-n
 projectHandler.printAllProjects();
 
 //Delete a Todo
-projectHandler.deleteTodoInProject(project2ID, newTodoID);
-projectHandler.printAllProjects();
+//projectHandler.deleteTodoInProject(project2ID, newTodoID);
+//projectHandler.printAllProjects();
 
 //Edit a Todo
 projectHandler.editTodoInProject(toEditID.projectID, toEditID.newTodoID, {description: "Edited", title: "Edited Title", notes: "does it?"});
@@ -33,16 +34,18 @@ projectHandler.editProject(project2ID,"My Edited Project");
 projectHandler.printAllProjects();
 
 //Delete a Project
-projectHandler.deleteProject(project1ID);
-projectHandler.printAllProjects();
+//projectHandler.deleteProject(project1ID);
+//projectHandler.printAllProjects();
+
+const contentDiv = document.getElementById("content");
+
+const projectList = projectHandler.getAllProjects();
+
+const projectListDiv = document.createElement("div");
 
 
-const button = document.createElement("button");
-document.getElementById("content").appendChild(button);
-button.addEventListener("click", function (e) {
-    const projectID = prompt();
-
-    const todoID = prompt();
-
-    projectHandler.getProjectByID(projectID).getTodoByID(todoID).printTodo();
+projectList.forEach(project => {
+    projectListDiv.appendChild(renderProject(project));
 });
+
+contentDiv.appendChild(projectListDiv);
