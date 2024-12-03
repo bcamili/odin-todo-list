@@ -1,17 +1,29 @@
-import { projectHandler } from "../Model/projectHandler";
 import { projectRenderer } from "./projectRenderer";
+import { getHeaderDiv, getSidebarDiv, getContentDiv} from "./UIELements";
 
-export const domHandler =(function () {
-    
+export const view =(function () {
+
+    const appDiv = document.getElementById("app");
+
+
+    const renderUI = (user, projects, todos) => {
+        const headerDiv = getHeaderDiv(user);
+        const sideBarDiv = getSidebarDiv(projects);
+        const contentDiv = getContentDiv(todos);
+
+        appDiv.appendChild(headerDiv);
+        appDiv.appendChild(sideBarDiv);
+        appDiv.appendChild(contentDiv);
+    }
+    /*
     const renderUI = () => {
-        const headerDiv = document.createElement("div");
-        headerDiv.id = "headerDiv";
-        const sideBarDiv = document.createElement("div");
-        sideBarDiv.id = "sideBarDiv";
+        const headerDiv = getHeaderDiv();
+        const sideBarDiv = getSidebarDiv(projectHandler.getAllProjects());
         const contentDiv = document.createElement("div");
         contentDiv.id = "contentDiv";
         return {headerDiv,sideBarDiv,contentDiv};
     }
+    */
 
     const showAllTodosInAllProjects = () => {
         const projectListDiv = document.createElement("div");

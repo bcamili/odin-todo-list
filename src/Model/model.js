@@ -1,13 +1,15 @@
 import { createProject } from "./projects";
 
-export const projectHandler = (function(){
+export const model = (function(){
     const projects = [];
 
     const defaultProject = createProject("default");
     projects.push(defaultProject);
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
 
     const getAllProjects = () => projects;
 
+    const getDefaultProject = () => defaultProject;
     const printAllProjects = () => {
         projects.forEach(project => {
             project.printProject();
@@ -52,5 +54,5 @@ export const projectHandler = (function(){
         }
     }
 
-    return {getAllProjects, printAllProjects, addProject, getProjectByID, deleteTodoInProject, addTodoToProject, editProject, editTodoInProject, deleteProject};
+    return {getAllProjects, getDefaultProject, printAllProjects, addProject, getProjectByID, deleteTodoInProject, addTodoToProject, editProject, editTodoInProject, deleteProject};
 })();
