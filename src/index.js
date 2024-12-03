@@ -1,6 +1,9 @@
 import "./style.css";
-import { projectHandler } from "./projectHandler";
-import { renderProject } from "./projectRenderer";
+import { projectHandler } from "./Model/projectHandler";
+import { todoApp } from "./TodoApp";
+
+todoApp.init();
+/*
 //Getting all Projects and Todos
 projectHandler.printAllProjects();
 
@@ -37,15 +40,7 @@ projectHandler.printAllProjects();
 //projectHandler.deleteProject(project1ID);
 //projectHandler.printAllProjects();
 
-const contentDiv = document.getElementById("content");
+//todoApp.showAllProjects();
+//todoApp.showAllTodosInAllProjects();
 
-const projectList = projectHandler.getAllProjects();
-
-const projectListDiv = document.createElement("div");
-
-
-projectList.forEach(project => {
-    projectListDiv.appendChild(renderProject(project));
-});
-
-contentDiv.appendChild(projectListDiv);
+*/

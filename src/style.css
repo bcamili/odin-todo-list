@@ -1,3 +1,27 @@
 body{
     background-color: aquamarine;
 }
+
+#app{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "header header "
+        "sideBar content ";
+}
+
+#headerDiv{
+    border: 1px solid red;
+    grid-area: header;
+}
+
+#sideBarDiv{
+    border: 1px solid red;
+    grid-area: sideBar;
+}
+
+#contentDiv{
+    border: 1px solid red;
+    grid-area: content;
+}

@@ -9,6 +9,7 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
     const getDueDate = () =>  dueDate;
     const getPriority = () =>  priority;
     const getNotes = () =>  notes;
+    
     const editTodo = {
         title: function (edit){title = edit},
         description: function (edit){description = edit},

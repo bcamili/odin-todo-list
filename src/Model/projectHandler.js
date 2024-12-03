@@ -1,6 +1,6 @@
 import { createProject } from "./projects";
 
-export const projectHandler = (function () {
+export const projectHandler = (function(){
     const projects = [];
 
     const defaultProject = createProject("default");
