@@ -10,7 +10,14 @@ export const controller = (function(){
         }
 
         const projects = model.getAllProjects();
-        view.renderUI(user, projects, model.getDefaultProject().getAllTodos());
+        const defaultTodos = model.getDefaultProject().getAllTodos();
+        view.renderUI(user, projects, projectHandler, defaultTodos);
+    }
+
+    const projectHandler = (projectID) =>{
+        const project = model.getProjectByID(projectID);
+        const todos = project.getAllTodos();
+        view.renderTodos(todos);
     }
 
     return {init};

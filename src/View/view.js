@@ -5,25 +5,28 @@ export const view =(function () {
 
     const appDiv = document.getElementById("app");
 
+    const headerDiv = document.createElement("div");
+    headerDiv.id = "headerDiv";
+    appDiv.appendChild(headerDiv);
+    const sideBarDiv = document.createElement("div");
+    sideBarDiv.id = "sideBarDiv";
+    appDiv.appendChild(sideBarDiv);
+    const contentDiv = document.createElement("div");
+    contentDiv.id = "contentDiv";
+    appDiv.appendChild(contentDiv);
 
-    const renderUI = (user, projects, todos) => {
-        const headerDiv = getHeaderDiv(user);
-        const sideBarDiv = getSidebarDiv(projects);
-        const contentDiv = getContentDiv(todos);
 
-        appDiv.appendChild(headerDiv);
-        appDiv.appendChild(sideBarDiv);
-        appDiv.appendChild(contentDiv);
+    const renderUI = (user, projects, projectHandler, defaultTodos) => {
+        headerDiv.appendChild(getHeaderDiv(user));
+        sideBarDiv.appendChild(getSidebarDiv(projects, projectHandler));
+        contentDiv.appendChild(getContentDiv(defaultTodos));
     }
-    /*
-    const renderUI = () => {
-        const headerDiv = getHeaderDiv();
-        const sideBarDiv = getSidebarDiv(projectHandler.getAllProjects());
-        const contentDiv = document.createElement("div");
-        contentDiv.id = "contentDiv";
-        return {headerDiv,sideBarDiv,contentDiv};
+
+    const renderTodos = (todos) =>{
+        contentDiv.innerHTML = ""
+        contentDiv.appendChild(getContentDiv(todos));
+        console.log("works?");
     }
-    */
 
     const showAllTodosInAllProjects = () => {
         const projectListDiv = document.createElement("div");
@@ -48,6 +51,6 @@ export const view =(function () {
         return projectListDiv;
     }
 
-    return {renderUI, showAllTodosInAllProjects, showAllProjects};
+    return {renderUI, showAllTodosInAllProjects, showAllProjects, renderTodos};
 
 })();
