@@ -4,6 +4,10 @@ import { renderTodo } from "./todoRenderer";
 export const getHeaderDiv = (user) => {
     const header = document.createElement("div");
     header.id = "header";
+    const logoDiv = document.createElement("div");
+    logoDiv.id = "logoDiv";
+    logoDiv.textContent="TodoApp";
+    header.appendChild(logoDiv);
     const usernameDiv = document.createElement("div");
     usernameDiv.id = "usernameDiv";
     header.appendChild(usernameDiv);

@@ -1,28 +1,105 @@
+html{
+    --backgroundColor: #000B58;
+    --darkColor: #003161;
+    --middleColor: #006A67;
+    --highlightColor: #FFF4B7;
+
+    font-family: "Nunito";
+    font-size: 12px;
+}
+
+/* .redBox{
+    border: 1px solid red;
+} */
+
 body{
-    background-color: aquamarine;
+    background-color: var(--backgroundColor);
     margin: 0;
 }
 
 #app{
     display: grid;
-    grid-template-columns: 1fr 1fr ;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 2fr ;
+    grid-template-rows: 1fr 8fr;
     grid-template-areas: 
-        "header header "
-        "sideBar content ";
+        "headerDiv headerDiv"
+        "sideBarDiv contentDiv";
 }
 
 #headerDiv{
-    border: 1px solid red;
-    grid-area: header;
+    background-color: var(--middleColor);
+    grid-area: headerDiv;
+}
+
+#header{
+    display: flex;
+    justify-content: space-between;
+}
+
+#logoDiv{
+    color: var(--highlightColor);
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+
+}
+
+#usernameDiv{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+#username{
+    color: var(--highlightColor);
+    font-size: 1.1rem;
+    text-align: right;
+    margin: 0;
 }
 
 #sideBarDiv{
-    border: 1px solid red;
-    grid-area: sideBar;
+    background-color: var(--darkColor);
+    grid-area: sideBarDiv;
+    padding-top: 10px;
 }
 
 #contentDiv{
-    border: 1px solid red;
-    grid-area: content;
+    grid-area: contentDiv;
+}
+
+.todoDiv{
+    background-color: var(--highlightColor);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+
+.todoTitleDiv{
+    
+}
+
+.todoTitle{
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.projectDiv{
+    padding: 5px 15px;
+}
+
+.projectDiv:hover{
+    background-color: var(--middleColor);
+}
+
+.projectTitleDiv{
+
+}
+
+.projectTitle{
+    color: var(--highlightColor);
+    margin: 0;
 }

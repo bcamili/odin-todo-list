@@ -15,6 +15,10 @@ export const view =(function () {
     contentDiv.id = "contentDiv";
     appDiv.appendChild(contentDiv);
 
+    headerDiv.classList = "redBox"
+    sideBarDiv.classList = "redBox"
+    contentDiv.classList = "redBox"
+
 
     const renderUI = (user, projects, projectHandler, defaultTodos) => {
         headerDiv.appendChild(getHeaderDiv(user));
@@ -25,7 +29,6 @@ export const view =(function () {
     const renderTodos = (todos) =>{
         contentDiv.innerHTML = ""
         contentDiv.appendChild(getContentDiv(todos));
-        console.log("works?");
     }
 
     const showAllTodosInAllProjects = () => {

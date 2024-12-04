@@ -3,8 +3,8 @@ import { renderTodo } from "./todoRenderer";
 export const projectRenderer = () => {
     
     const projectDiv = document.createElement("div");
-    projectDiv.id = "projectDiv";
-    // create a method to only show projects without todos
+    projectDiv.classList = "projectDiv";
+
     const renderProject = (project) =>{
         const projectTitleDiv = document.createElement("div");
         projectTitleDiv.classList = "projectTitleDiv";
