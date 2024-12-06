@@ -6,6 +6,11 @@ export const model = (function(){
     const defaultProject = createProject("default");
     projects.push(defaultProject);
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
 
     const getAllProjects = () => projects;
 

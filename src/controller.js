@@ -17,7 +17,7 @@ export const controller = (function(){
     const projectHandler = (projectID) =>{
         const project = model.getProjectByID(projectID);
         const todos = project.getAllTodos();
-        view.renderTodos(todos);
+        view.renderTodos(project.getTitle(),todos);
     }
 
     return {init};

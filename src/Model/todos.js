@@ -6,7 +6,14 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
     const getProjectID = () => projectID;
     const getTitle = () =>  title;
     const getDescription = () =>  description;
-    const getDueDate = () =>  dueDate;
+    const getDueDate = () =>  {
+        const day = getDayName(dueDate.getDay());
+        const dayOfMonth = dueDate.getDate();
+        const month = getMonthName(dueDate.getMonth());
+        const year = dueDate.getFullYear();
+
+        return `${day} ${month} ${dayOfMonth} ${year}`;
+    };
     const getPriority = () =>  priority;
     const getNotes = () =>  notes;
     
@@ -27,6 +34,16 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
             Priority: ${priority}
             Notes: ${notes}
             `);
+    }
+
+    const getMonthName = (month) =>{
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        return months[month];
+    }
+
+    const getDayName = (day) =>{
+        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+        return days[day];
     }
 
     return {getID, getProjectID, getTitle, getDescription, getDueDate, getPriority, getNotes, printTodo, editTodo};

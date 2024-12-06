@@ -13,7 +13,7 @@ export const getHeaderDiv = (user) => {
     header.appendChild(usernameDiv);
     const username = document.createElement("p");
     username.id = "username";
-    username.textContent = user.name;
+    username.textContent = "by " + user.name;
     usernameDiv.appendChild(username);
 
     return header;
@@ -34,7 +34,6 @@ export const getSidebarDiv = (projects, handler) => {
 }
 
 export const getContentDiv = (todos) => {
-    
     const todoList = document.createElement("div");
     todoList.id = "todoList";
     todos.forEach(todo => {
