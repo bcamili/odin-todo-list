@@ -29,11 +29,14 @@ export const view =(function () {
     sideBarButton.addEventListener("click", () =>{
         sideBarButton.textContent = sideBarButton.textContent == ">" ? sideBarButton.textContent = "<" : sideBarButton.textContent = ">";
         sideBarDiv.classList.toggle("open");
-        contentDiv.classList.toggle("open");
     });
     sideBarTitle.appendChild(sideBarButton);
 
-    appDiv.appendChild(sideBarDiv);
+    const SBCWrapper = document.createElement("div");
+    SBCWrapper.id = "SBCWrapper";
+    SBCWrapper.appendChild(sideBarDiv);
+    SBCWrapper.appendChild(contentDiv);
+    appDiv.appendChild(SBCWrapper);
 
 
     

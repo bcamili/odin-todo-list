@@ -11,7 +11,18 @@ export const model = (function(){
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
-
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    
     const getAllProjects = () => projects;
 
     const getDefaultProject = () => defaultProject;
