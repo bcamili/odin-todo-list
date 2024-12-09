@@ -3,6 +3,10 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
     const id = String(Math.floor(Math.random()*1000000000))
     
     const getID = () => id;
+
+    let done = false;
+    const getDone = () => done;
+    const toggleDone = () => done = done == false;
     const getProjectID = () => projectID;
     const getTitle = () =>  title;
     const getDescription = () =>  description;
@@ -33,6 +37,7 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
             Due Date: ${dueDate}
             Priority: ${priority}
             Notes: ${notes}
+            Done: ${done}
             `);
     }
 
@@ -46,5 +51,5 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
         return days[day];
     }
 
-    return {getID, getProjectID, getTitle, getDescription, getDueDate, getPriority, getNotes, printTodo, editTodo};
+    return {getID, getDone, toggleDone, getProjectID, getTitle, getDescription, getDueDate, getPriority, getNotes, printTodo, editTodo};
 }

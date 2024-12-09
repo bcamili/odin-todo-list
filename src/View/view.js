@@ -46,19 +46,20 @@ export const view =(function () {
     contentDiv.classList += " redBox"
 
 
-    const renderUI = (user, projects, projectHandler, defaultTodos) => {
+    const renderUI = (user, projects, defaultTodos, handlerFunctions) => {
         headerDiv.appendChild(getHeaderDiv(user));
-        sideBarDiv.appendChild(getSidebarDiv(projects, projectHandler));
-        contentDiv.appendChild(getContentDiv(defaultTodos));
+        sideBarDiv.appendChild(getSidebarDiv(projects, handlerFunctions.projectHandler()));
+        const contentHandlers = handlerFunctions.contentHandlers();
+        contentDiv.appendChild(getContentDiv(defaultTodos, contentHandlers));
     }
 
-    const renderTodos = (projectTitle, todos) =>{
+    const renderTodos = (projectTitle, todos, handlerFunctions) =>{
         contentDiv.innerHTML = "";
         const title = document.createElement("div");
         title.id = "projectTitle";
         title.textContent = projectTitle;
         contentDiv.appendChild(title);
-        contentDiv.appendChild(getContentDiv(todos));
+        contentDiv.appendChild(getContentDiv(todos, handlerFunctions));
     }
 
     const showAllTodosInAllProjects = () => {

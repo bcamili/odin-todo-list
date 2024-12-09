@@ -5,6 +5,8 @@ export const model = (function(){
 
     const defaultProject = createProject("default");
     projects.push(defaultProject);
+    const todoID = defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
+    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
@@ -16,13 +18,13 @@ export const model = (function(){
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
-    defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
-    
+    defaultProject.toggleTodo(todoID);
+
     const getAllProjects = () => projects;
 
     const getDefaultProject = () => defaultProject;
@@ -63,6 +65,11 @@ export const model = (function(){
         }
     }
 
+    const toggleTodoInProject = (projectID, todoId) => {
+        const project = getProjectByID(projectID);
+        project.toggleTodo(todoID);
+    }
+
     const deleteProject = (projectID) =>{
         const toDelete = getProjectByID(projectID);
         if(toDelete){
@@ -70,5 +77,17 @@ export const model = (function(){
         }
     }
 
-    return {getAllProjects, getDefaultProject, printAllProjects, addProject, getProjectByID, deleteTodoInProject, addTodoToProject, editProject, editTodoInProject, deleteProject};
+    return {
+        getAllProjects, 
+        getDefaultProject, 
+        printAllProjects, 
+        getProjectByID, 
+        addProject, 
+        editProject, 
+        deleteProject,
+        addTodoToProject, 
+        toggleTodoInProject, 
+        editTodoInProject, 
+        deleteTodoInProject
+    };
 })();

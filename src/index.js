@@ -1,5 +1,5 @@
 import "./style.css";
-import { controller } from "./controller";
+import { controller } from "./Controller/controller";
 import { model } from "./Model/model";
 
 

@@ -188,20 +188,73 @@ html,body{
 /*     width: minmax(100px, 200px);
  */}
 
-
-.todoTitleDiv{
+.todoHeader{
+    display: flex;
     font-size: 1.5rem;
     margin: 0;
 }
 
-.descriptionDiv{
+.todoTitleDiv{
+    margin-left: 5px;
+    flex-grow: 1;
+}
 
+.todoContentDiv{
+    display: flex;
+    flex-direction: column;
+    max-height: 0px;
+    padding: 0px 5px 0px 5px;
+    transition: 0.3s ease;
+    gap: 5px;
+    overflow: hidden;
+}
+
+.todoContentDiv.open{
+    max-height: 500px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.descriptionDiv{
+    font-size: 1.2rem;
+    span{
+        font-weight: bold;
+    }
+}
+
+.dueDateDiv{
+    font-size: 1.2rem;
+    span{
+        font-weight: bold;
+    }
 }
 
 .priorityDiv{
+    display: flex;
+    font-size: 1.2rem;
+    gap: 5px;
+    align-items: center;
+    span{
+        font-weight: bold;
+    }
 
+    .priorityPoint{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--darkColor);
+        width: 15px;
+        height: 15px;
+        border-radius: 30px;
+        color: var(--highlightColor);
+        font-size: 0.8rem;
+
+    }
 }
 
 .notesDiv{
-
+    font-size: 1.2rem;
+    span{
+        font-weight: bold;
+    }
 }

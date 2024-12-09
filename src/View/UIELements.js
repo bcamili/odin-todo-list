@@ -33,11 +33,11 @@ export const getSidebarDiv = (projects, handler) => {
     return projectList;
 }
 
-export const getContentDiv = (todos) => {
+export const getContentDiv = (todos, handlerFunctions) => {
     const todoList = document.createElement("div");
     todoList.id = "todoList";
     todos.forEach(todo => {
-        todoList.appendChild(renderTodo(todo));
+        todoList.appendChild(renderTodo(todo, handlerFunctions));
     });
 
     return todoList;
