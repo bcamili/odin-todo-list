@@ -16,15 +16,23 @@ export const handlerFunctionsFactory = (function (model, view){
         const checkboxHandler = () =>{ 
 
             const returnHandler = (todo) => {
-                /* const project = model.getProjectByID(projectID);
-                const todo = project.getTodoByID(todoID); */
                 todo.toggleDone();
             }
 
             return returnHandler;
         }
 
-        return {checkboxHandler};
+        const todoTitleEditHandler = (todo, input) =>{
+            const returnHandler = (todo, input) => {
+                console.log(input);
+                todo.editTodo.title(input);
+                todo.printTodo();
+            }
+
+            return returnHandler;
+        }
+
+        return {checkboxHandler, todoTitleEditHandler};
     }
 
 

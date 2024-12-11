@@ -1,4 +1,7 @@
-export const renderTodo = (todo, handlerFunctions) => {
+import editIcon from "../assets/img/pencil.svg";
+import checkIcon from"../assets/img/check-bold.svg";
+
+export const renderTodo = (todo, contentHandler) => {
     const todoDiv = document.createElement("div");
     todoDiv.classList = "todoDiv";
 
@@ -9,18 +12,65 @@ export const renderTodo = (todo, handlerFunctions) => {
     doneToggle.setAttribute("type", "checkbox");
     doneToggle.checked = todo.getDone();
     doneToggle.addEventListener("click", () => {
-        const handler = handlerFunctions.checkboxHandler()
+        const handler = contentHandler.checkboxHandler()
         handler(todo);
     });
 
     doneToggle.classList = "doneToggle";
 
     const todoTitleDiv = document.createElement("div");
-    todoTitleDiv.addEventListener("click", ()=>{
-        todoContentDiv.classList.toggle("open");
-    });
     todoTitleDiv.classList = "todoTitleDiv";
+
+    const toggleOpen = () =>{
+        todoContentDiv.classList.toggle("open");
+    }
+
+    todoTitleDiv.addEventListener("click", toggleOpen);
+    
+    
+    const editIconImg = document.createElement("img");
+    editIconImg.classList = "editIconImg";
+    editIconImg.src = editIcon;
+    editIconImg.addEventListener("click", () =>{
+        todoTitleDiv.innerHTML = "";
+        console.log();
+        if(!todoContentDiv.classList.contains("open")){
+            toggleOpen();
+        }
+        todoTitleDiv.removeEventListener("click", toggleOpen);
+        const titleEditInput = document.createElement("span");
+        titleEditInput.role = "textbox";
+        titleEditInput.contentEditable = true;
+        titleEditInput.className = "titleEditInput";
+        titleEditInput.textContent = todo.getTitle();
+
+        const checkIconImg = document.createElement("img");
+        checkIconImg.classList = "editIconImg";
+        checkIconImg.src = checkIcon;
+        checkIconImg.style.zIndex = 2;
+        checkIconImg.addEventListener("click", () =>{
+            const input = titleEditInput.textContent;
+            console.log(input);
+
+            const handler = contentHandler.todoTitleEditHandler()
+            handler(todo, input);
+
+            todoTitleDiv.innerHTML = "";
+            todoTitleDiv.style.display = "block";
+            todoTitleDiv.textContent = todo.getTitle();
+            todoTitleDiv.addEventListener("click", toggleOpen);
+            toggleOpen();
+            todoTitleDiv.appendChild(editIconImg);
+        });
+        
+        todoTitleDiv.appendChild(titleEditInput);
+        todoTitleDiv.appendChild(checkIconImg);
+
+    });
     todoTitleDiv.textContent = todo.getTitle();
+
+    todoTitleDiv.appendChild(editIconImg);
+    
     
     todoHeader.appendChild(doneToggle);
     todoHeader.appendChild(todoTitleDiv);
@@ -31,26 +81,30 @@ export const renderTodo = (todo, handlerFunctions) => {
 
     const descriptionDiv = document.createElement("div");
     descriptionDiv.classList = "descriptionDiv"
-    descriptionDiv.innerHTML = `<span>Description: </span> ${todo.getDescription()}`;
+    descriptionDiv.innerHTML = `<span>Description: </span><br> ${todo.getDescription()}`;
 
     const dueDateDiv = document.createElement("div");
     dueDateDiv.classList = "dueDateDiv"
-    dueDateDiv.innerHTML = `<span>Due on: </span> ${todo.getDueDate()}`;
+    dueDateDiv.innerHTML = `<span>Due on: </span><br> ${todo.getDueDate()}`;
 
     const priorityDiv = document.createElement("div");
     priorityDiv.classList = "priorityDiv"
     priorityDiv.innerHTML = `<span>Priority: </span>`;
     
+    const priorityPoints = document.createElement("div");
+    priorityPoints.classList = "priorityPoints"
     for(let i = 0; i<todo.getPriority(); i++){
         const priorityPoint = document.createElement("div");
         priorityPoint.classList = "priorityPoint";
         priorityPoint.textContent = i+1;
-        priorityDiv.appendChild(priorityPoint);
+        priorityPoints.appendChild(priorityPoint);
     }
+
+    priorityDiv.appendChild(priorityPoints);
 
     const notesDiv = document.createElement("div");
     notesDiv.classList = "notesDiv"
-    notesDiv.innerHTML = `<span>Notes: </span> ${todo.getNotes()}`;
+    notesDiv.innerHTML = `<span>Notes: </span><br>${todo.getNotes()}`;
 
     todoContentDiv.appendChild(descriptionDiv);
     todoContentDiv.appendChild(dueDateDiv);

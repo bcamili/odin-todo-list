@@ -6,6 +6,7 @@ html{
 
     font-family: "Nunito";
     font-size: 12px;
+    word-break: break-word;
 }
 
 /* .redBox{
@@ -89,14 +90,12 @@ html,body{
 @media (max-width: 500px){
 
     .sideBarDiv {
-/*         transform: translateX(calc(-1 * calc(100% - 20px)));
- */    
+  
         margin-left: calc(-1 * calc(33% - 20px));
     }
 
     .sideBarDiv.open{
-/*         transform: translateX(0);
- */    
+ 
         margin-left: 0px;
     }
 }
@@ -170,6 +169,7 @@ html,body{
 }
 
 #todoList{
+    width: 100%;
     height: 100%;
     overflow: scroll;
 }
@@ -181,23 +181,46 @@ html,body{
 }
 
 .todoDiv{
+    overflow: hidden;
     background-color: var(--highlightColor);
     padding: 10px;
     margin: 5px;
     border-radius: 10px;
-/*     width: minmax(100px, 200px);
- */}
+ }
 
 .todoHeader{
     display: flex;
-    font-size: 1.5rem;
     margin: 0;
 }
 
 .todoTitleDiv{
     margin-left: 5px;
     flex-grow: 1;
+    font-size: 1.5rem;
 }
+
+.titleEditInput{
+    font-size: 1.5rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+.titleEditInput:focus{
+    border: 1px blue;
+}
+
+.editIconImg{
+    display: inline;
+    margin: 0 0.125em;
+    margin-left: 5px;
+    padding: 0;
+    vertical-align: baseline;
+    width: 1.5rem;
+}
+
 
 .todoContentDiv{
     display: flex;
@@ -217,25 +240,33 @@ html,body{
 
 .descriptionDiv{
     font-size: 1.2rem;
+    width: fit-content;
     span{
+        font-size: 1.1rem;
         font-weight: bold;
     }
 }
 
 .dueDateDiv{
     font-size: 1.2rem;
+
     span{
+        font-size: 1.1rem;
         font-weight: bold;
     }
 }
 
 .priorityDiv{
-    display: flex;
     font-size: 1.2rem;
     gap: 5px;
     align-items: center;
     span{
+        font-size: 1.1rem;
         font-weight: bold;
+    }
+
+    .priorityPoints{
+        display: flex;
     }
 
     .priorityPoint{
@@ -254,7 +285,10 @@ html,body{
 
 .notesDiv{
     font-size: 1.2rem;
+
     span{
+        font-size: 1.1rem;
         font-weight: bold;
     }
 }
+
