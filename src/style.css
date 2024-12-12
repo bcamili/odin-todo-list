@@ -208,9 +208,9 @@ html,body{
     color: var(--middleColor);
 }
 
-.titleEditInput:focus{
-    border: 1px blue;
-}
+
+
+
 
 .editIconImg{
     display: inline;
@@ -238,37 +238,39 @@ html,body{
     padding-bottom: 10px;
 }
 
+.contentEditInput{
+    font-size: 1.2rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+.contentDataTag{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
 .descriptionDiv{
     font-size: 1.2rem;
     width: fit-content;
-    span{
-        font-size: 1.1rem;
-        font-weight: bold;
-    }
 }
 
 .dueDateDiv{
     font-size: 1.2rem;
-
-    span{
-        font-size: 1.1rem;
-        font-weight: bold;
-    }
 }
 
 .priorityDiv{
+    display: flex;
     font-size: 1.2rem;
     gap: 5px;
     align-items: center;
-    span{
-        font-size: 1.1rem;
-        font-weight: bold;
-    }
-
+    
     .priorityPoints{
         display: flex;
     }
-
+    
     .priorityPoint{
         display: flex;
         justify-content: center;
@@ -281,14 +283,22 @@ html,body{
         font-size: 0.8rem;
 
     }
+
+    .priorityButtons{
+        font-size: 1.3rem;
+        line-height: 1rem;
+        font-weight: bold;
+        border: 2px solid var(--darkColor);
+        border-radius: 30px;
+        width: 10px;
+        height: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .notesDiv{
     font-size: 1.2rem;
-
-    span{
-        font-size: 1.1rem;
-        font-weight: bold;
-    }
 }
 

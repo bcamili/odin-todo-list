@@ -28,12 +28,11 @@ export const renderTodo = (todo, contentHandler) => {
     todoTitleDiv.addEventListener("click", toggleOpen);
     
     
-    const editIconImg = document.createElement("img");
-    editIconImg.classList = "editIconImg";
-    editIconImg.src = editIcon;
-    editIconImg.addEventListener("click", () =>{
+    const TitleEditIconImg = document.createElement("img");
+    TitleEditIconImg.classList = "editIconImg";
+    TitleEditIconImg.src = editIcon;
+    TitleEditIconImg.addEventListener("click", () =>{
         todoTitleDiv.innerHTML = "";
-        console.log();
         if(!todoContentDiv.classList.contains("open")){
             toggleOpen();
         }
@@ -47,7 +46,6 @@ export const renderTodo = (todo, contentHandler) => {
         const checkIconImg = document.createElement("img");
         checkIconImg.classList = "editIconImg";
         checkIconImg.src = checkIcon;
-        checkIconImg.style.zIndex = 2;
         checkIconImg.addEventListener("click", () =>{
             const input = titleEditInput.textContent;
             console.log(input);
@@ -60,7 +58,7 @@ export const renderTodo = (todo, contentHandler) => {
             todoTitleDiv.textContent = todo.getTitle();
             todoTitleDiv.addEventListener("click", toggleOpen);
             toggleOpen();
-            todoTitleDiv.appendChild(editIconImg);
+            todoTitleDiv.appendChild(TitleEditIconImg);
         });
         
         todoTitleDiv.appendChild(titleEditInput);
@@ -69,7 +67,7 @@ export const renderTodo = (todo, contentHandler) => {
     });
     todoTitleDiv.textContent = todo.getTitle();
 
-    todoTitleDiv.appendChild(editIconImg);
+    todoTitleDiv.appendChild(TitleEditIconImg);
     
     
     todoHeader.appendChild(doneToggle);
@@ -79,37 +77,254 @@ export const renderTodo = (todo, contentHandler) => {
     const todoContentDiv = document.createElement("div");
     todoContentDiv.classList = "todoContentDiv"
 
+    
+    //______________________________________________
+    const descriptionWrapper = document.createElement("div");
+    descriptionWrapper.className = "contentDataWrapper";
+    todoContentDiv.appendChild(descriptionWrapper);
+
+    const descriptionTag = document.createElement("div");
+    descriptionTag.className = "contentDataTag";
+    descriptionTag.textContent = "Description:";
+    descriptionWrapper.appendChild(descriptionTag);
+
     const descriptionDiv = document.createElement("div");
     descriptionDiv.classList = "descriptionDiv"
-    descriptionDiv.innerHTML = `<span>Description: </span><br> ${todo.getDescription()}`;
+    descriptionWrapper.appendChild(descriptionDiv);
+    
+    const descriptionEditIconImg = document.createElement("img");
+    descriptionEditIconImg.classList = "editIconImg";
+    descriptionEditIconImg.src = editIcon;
+    descriptionEditIconImg.addEventListener("click", () =>{
+        descriptionDiv.innerHTML = "";
+        
+        if(!todoContentDiv.classList.contains("open")){
+            toggleOpen();
+        }
+        todoTitleDiv.removeEventListener("click", toggleOpen);
+
+        const descriptionEditInput = document.createElement("span");
+        descriptionEditInput.role = "textbox";
+        descriptionEditInput.style.minWidth = "100px";
+        descriptionEditInput.contentEditable = true;
+        descriptionEditInput.className = "contentEditInput";
+        descriptionEditInput.textContent = todo.getDescription();            
+
+        const checkIconImg = document.createElement("img");
+        checkIconImg.classList = "editIconImg";
+        checkIconImg.src = checkIcon;
+        checkIconImg.addEventListener("click", () =>{
+            const input = descriptionEditInput.textContent;
+            const handler = contentHandler.todoDescriptionEditHandler()
+            handler(todo, input);
+
+            descriptionDiv.textContent = todo.getDescription();
+            todoTitleDiv.addEventListener("click", toggleOpen);
+            descriptionDiv.appendChild(descriptionEditIconImg);
+        });
+        
+        descriptionDiv.appendChild(descriptionEditInput);
+        descriptionDiv.appendChild(checkIconImg);
+
+    });
+    descriptionDiv.textContent = todo.getDescription();
+
+    descriptionDiv.appendChild(descriptionEditIconImg);
+
+
+    //______________________________________________
+    const dueDateWrapper = document.createElement("div");
+    dueDateWrapper.className = "contentDataWrapper";
+    todoContentDiv.appendChild(dueDateWrapper);
+
+    const dueDateTag = document.createElement("div");
+    dueDateTag.className = "contentDataTag";
+    dueDateTag.textContent = "Due on:";
+    dueDateWrapper.appendChild(dueDateTag);
 
     const dueDateDiv = document.createElement("div");
-    dueDateDiv.classList = "dueDateDiv"
-    dueDateDiv.innerHTML = `<span>Due on: </span><br> ${todo.getDueDate()}`;
+    dueDateDiv.classList = "dueDateDiv";
+    dueDateWrapper.appendChild(dueDateDiv);
+
+    const dueDateEditIconImg = document.createElement("img");
+    dueDateEditIconImg.classList = "editIconImg";
+    dueDateEditIconImg.src = editIcon;
+    dueDateEditIconImg.addEventListener("click", () =>{
+        dueDateDiv.innerHTML = "";
+        todoTitleDiv.removeEventListener("click", toggleOpen);
+        
+        const dueDateEditInput = document.createElement("input");
+        dueDateEditInput.type = "date";
+        dueDateEditInput.className = "contentEditInput";
+        let date = todo.getDueDate();
+        dueDateEditInput.value = `${date.year}-${date.month}-${date.dayOfMonth}`;            
+
+        const checkIconImg = document.createElement("img");
+        checkIconImg.classList = "editIconImg";
+        checkIconImg.src = checkIcon;
+        checkIconImg.addEventListener("click", () =>{
+            const input = dueDateEditInput.value;
+            console.log(input);
+            const handler = contentHandler.todoDueDateEditHandler()
+            handler(todo, input);
+
+            let date = todo.getDueDate();
+            dueDateDiv.textContent = `${date.day} ${date.nameOfMonth} ${date.dayOfMonth} ${date.year}`;
+            todoTitleDiv.addEventListener("click", toggleOpen);
+            dueDateDiv.appendChild(dueDateEditIconImg);
+        });
+        
+        dueDateDiv.appendChild(dueDateEditInput);
+        dueDateDiv.appendChild(checkIconImg);
+    });
+
+    const date = todo.getDueDate();
+    dueDateDiv.textContent = `${date.day} ${date.nameOfMonth} ${date.dayOfMonth} ${date.year}`;
+
+    dueDateDiv.appendChild(dueDateEditIconImg);
+
+
+    //______________________________________________
+    const priorityWrapper = document.createElement("div");
+    priorityWrapper.className = "contentDataWrapper";
+    todoContentDiv.appendChild(priorityWrapper);
+
+    const priorityTag = document.createElement("div");
+    priorityTag.className = "contentDataTag";
+    priorityTag.textContent = "Priority:";
+    priorityWrapper.appendChild(priorityTag);
 
     const priorityDiv = document.createElement("div");
-    priorityDiv.classList = "priorityDiv"
-    priorityDiv.innerHTML = `<span>Priority: </span>`;
-    
-    const priorityPoints = document.createElement("div");
-    priorityPoints.classList = "priorityPoints"
-    for(let i = 0; i<todo.getPriority(); i++){
-        const priorityPoint = document.createElement("div");
-        priorityPoint.classList = "priorityPoint";
-        priorityPoint.textContent = i+1;
-        priorityPoints.appendChild(priorityPoint);
+    priorityDiv.classList = "priorityDiv";
+    priorityWrapper.appendChild(priorityDiv);
+
+    const renderPriorities = (num) => {
+        priorityDiv.innerHTML ="";
+        const priorityPoints = document.createElement("div");
+        priorityPoints.classList = "priorityPoints"
+        for(let i = 0; i<num; i++){
+            const priorityPoint = document.createElement("div");
+            priorityPoint.classList = "priorityPoint";
+            priorityPoint.textContent = i+1;
+            priorityPoints.appendChild(priorityPoint);
+        }
+
+        priorityDiv.appendChild(priorityPoints);
     }
 
-    priorityDiv.appendChild(priorityPoints);
+    const priorityEditIconImg = document.createElement("img");
+    priorityEditIconImg.classList = "editIconImg";
+    priorityEditIconImg.src = editIcon;
+    priorityEditIconImg.addEventListener("click", () =>{
+        todoTitleDiv.removeEventListener("click", toggleOpen);
+
+        let priorityLevel = todo.getPriority();
+        renderPriorities(priorityLevel);
+
+        const minusButton = document.createElement("div");
+        minusButton.className = "priorityButtons";
+        minusButton.textContent= "-";
+        priorityDiv.insertBefore(minusButton, priorityDiv.firstChild);
+
+        const plusButton = document.createElement("div");
+        plusButton.className = "priorityButtons";
+        plusButton.textContent= "+";
+        priorityDiv.appendChild(plusButton);
+
+        minusButton.addEventListener("click", () =>{
+            if (priorityLevel>1){
+                priorityLevel -= 1;
+            }
+            renderPriorities(priorityLevel);
+            priorityDiv.insertBefore(minusButton, priorityDiv.firstChild);
+            priorityDiv.appendChild(plusButton);
+            priorityDiv.appendChild(checkIconImg);
+        });
+
+        plusButton.addEventListener("click", () =>{
+            if (priorityLevel<5){
+                priorityLevel += 1;
+            }
+            renderPriorities(priorityLevel);
+            priorityDiv.insertBefore(minusButton, priorityDiv.firstChild);
+            priorityDiv.appendChild(plusButton);
+            priorityDiv.appendChild(checkIconImg);
+        });
+
+        const checkIconImg = document.createElement("img");
+        checkIconImg.classList = "editIconImg";
+        checkIconImg.src = checkIcon;
+        checkIconImg.addEventListener("click", () =>{
+            todoTitleDiv.addEventListener("click", toggleOpen);
+
+            const handler = contentHandler.todoPriorityEditHandler()
+            handler(todo, priorityLevel);
+
+            renderPriorities(todo.getPriority());
+            priorityDiv.appendChild(priorityEditIconImg);
+        });
+        
+        priorityDiv.appendChild(checkIconImg);
+    });
+
+    
+    renderPriorities(todo.getPriority());
+    priorityDiv.appendChild(priorityEditIconImg);
+    
+
+
+    //______________________________________________
+    const notesWrapper = document.createElement("div");
+    notesWrapper.className = "contentDataWrapper";
+    todoContentDiv.appendChild(notesWrapper);
+
+    const notesTag = document.createElement("div");
+    notesTag.className = "contentDataTag";
+    notesTag.textContent = "Notes:";
+    notesWrapper.appendChild(notesTag);
 
     const notesDiv = document.createElement("div");
-    notesDiv.classList = "notesDiv"
-    notesDiv.innerHTML = `<span>Notes: </span><br>${todo.getNotes()}`;
+    notesDiv.classList = "notesDiv";
+    notesWrapper.appendChild(notesDiv);
+    
+    const notesEditIconImg = document.createElement("img");
+    notesEditIconImg.classList = "editIconImg";
+    notesEditIconImg.src = editIcon;
+    notesEditIconImg.addEventListener("click", () =>{
+        notesDiv.innerHTML = "";
+        todoTitleDiv.removeEventListener("click", toggleOpen);
+        const notesEditInput = document.createElement("span");
+        notesEditInput.role = "textbox";
+        notesEditInput.contentEditable = true;
+        notesEditInput.className = "contentEditInput";
+        notesEditInput.textContent = todo.getNotes();            
 
-    todoContentDiv.appendChild(descriptionDiv);
-    todoContentDiv.appendChild(dueDateDiv);
-    todoContentDiv.appendChild(priorityDiv);
-    todoContentDiv.appendChild(notesDiv);
+        const checkIconImg = document.createElement("img");
+        checkIconImg.classList = "editIconImg";
+        checkIconImg.src = checkIcon;
+        checkIconImg.addEventListener("click", () =>{
+            const input = notesEditInput.textContent;
+            const handler = contentHandler.todoNotesEditHandler()
+            handler(todo, input);
+
+            notesDiv.textContent = todo.getNotes();
+            todoTitleDiv.addEventListener("click", toggleOpen);
+            notesDiv.appendChild(notesEditIconImg);
+        });
+        
+        notesDiv.appendChild(notesEditInput);
+        notesDiv.appendChild(checkIconImg);
+
+    });
+    notesDiv.textContent = todo.getNotes();
+
+    notesDiv.appendChild(notesEditIconImg);
+    //______________________________________________
+
+    todoContentDiv.appendChild(descriptionWrapper);
+    todoContentDiv.appendChild(dueDateWrapper);
+    todoContentDiv.appendChild(priorityWrapper);
+    todoContentDiv.appendChild(notesWrapper);
 
     todoDiv.appendChild(todoContentDiv);
     

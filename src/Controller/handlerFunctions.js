@@ -24,15 +24,56 @@ export const handlerFunctionsFactory = (function (model, view){
 
         const todoTitleEditHandler = (todo, input) =>{
             const returnHandler = (todo, input) => {
-                console.log(input);
                 todo.editTodo.title(input);
-                todo.printTodo();
             }
 
             return returnHandler;
         }
 
-        return {checkboxHandler, todoTitleEditHandler};
+        const todoDescriptionEditHandler = (todo, input) =>{
+            const returnHandler = (todo, input) => {
+                todo.editTodo.description(input);
+            }
+
+            return returnHandler;
+        }
+
+        const todoNotesEditHandler = (todo, input) =>{
+            const returnHandler = (todo, input) => {
+                todo.editTodo.notes(input);
+            }
+
+            return returnHandler;
+        }
+
+        const todoDueDateEditHandler = (todo, input) =>{
+            const returnHandler = (todo, input) => {
+                const date = new Date(input);
+                console.log(input);
+                console.log(date);
+                todo.editTodo.dueDate(date);
+            }
+
+            return returnHandler;
+        }
+
+        const todoPriorityEditHandler = (todo, input) =>{
+            const returnHandler = (todo, input) => {
+                todo.editTodo.priority(input);
+            }
+
+            return returnHandler;
+        }
+
+
+        return {
+            checkboxHandler, 
+            todoTitleEditHandler,
+            todoDescriptionEditHandler, 
+            todoNotesEditHandler,
+            todoDueDateEditHandler,
+            todoPriorityEditHandler
+        };
     }
 
 
