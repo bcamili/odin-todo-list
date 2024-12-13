@@ -1,17 +1,36 @@
 export const handlerFunctionsFactory = (function (model, view){
     
-    const projectHandler = () =>{ 
+    const sideBarHandlers = () =>{ 
 
-        const returnHandler = (projectID) => {
-            const project = model.getProjectByID(projectID);
-            const todos = project.getAllTodos();
-            view.renderTodos(project.getTitle(),todos,contentHandlers());
+        const projectHandler = (project) =>{
+            view.renderTodos(project, model.getDefaultProject().getID(), contentHandlers());
         }
 
-        return returnHandler;
+        
+        const allTodosHandler = () =>{
+            const allProjects = model.getAllProjects();
+            view.renderAll(allProjects, model.getDefaultProject().getID() ,contentHandlers());
+        }
+
+        const createNewProjectHandler = (projectTitle) =>{
+            const newProjectID = model.addProject(projectTitle);
+            projectHandler(model.getProjectByID(newProjectID));
+            updateSideBar();
+        }
+        
+        return {projectHandler, allTodosHandler, createNewProjectHandler};
     }
 
     const contentHandlers = () =>{
+
+        const projectTitleEditHandler = (project, input) =>{
+            const returnHandler = (project, input) => {
+                model.editProject(project.getID(), input);
+                updateSideBar();
+            }
+
+            return returnHandler;
+        }
 
         const checkboxHandler = () =>{ 
 
@@ -65,6 +84,33 @@ export const handlerFunctionsFactory = (function (model, view){
             return returnHandler;
         }
 
+        
+        const addTodoToProject = (projectID, title, description, dueDate, priority, notes) =>{
+            console.log("works")
+            model.addTodoToProject(projectID, title, description, dueDate, priority, notes);
+            const project = model.getProjectByID(projectID);
+            if(project === model.getDefaultProject()){
+                sideBarHandlers().allTodosHandler();
+            }else{
+                sideBarHandlers().projectHandler(project);
+            }
+        }
+
+        const deleteTodoHandler = (projectID, todoID) =>{+
+            model.deleteTodoInProject(projectID, todoID);
+            const project = model.getProjectByID(projectID);
+            if(project === model.getDefaultProject()){
+                sideBarHandlers().allTodosHandler();
+            }else{
+                sideBarHandlers().projectHandler(project);
+            }
+        }
+
+        const deleteProjectHandler = (projectID) => {
+            model.deleteProject(projectID);
+            updateSideBar();
+            sideBarHandlers().allTodosHandler();
+        }
 
         return {
             checkboxHandler, 
@@ -72,10 +118,18 @@ export const handlerFunctionsFactory = (function (model, view){
             todoDescriptionEditHandler, 
             todoNotesEditHandler,
             todoDueDateEditHandler,
-            todoPriorityEditHandler
+            todoPriorityEditHandler,
+            projectTitleEditHandler,
+            addTodoToProject,
+            deleteTodoHandler,
+            deleteProjectHandler
         };
     }
 
+    const updateSideBar = () => {
+        view.updateSideBar(model.getAllProjects(), model.getDefaultProject().getID(), sideBarHandlers());
+    }
 
-    return {projectHandler, contentHandlers};
+
+    return {sideBarHandlers, contentHandlers};
 });

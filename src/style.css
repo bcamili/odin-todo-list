@@ -106,7 +106,7 @@ html,body{
      }
 }
 
-#sideBarTitle{
+#sideBarProjectsTitle{
     display: flex;
     font-weight: bold;
     justify-content: space-between;
@@ -138,7 +138,16 @@ html,body{
 }
 
 
+#sideBarAllTodos{
+    padding: 5px 15px;
+    border-bottom:  1px solid var(--backgroundColor);
+    color: var(--highlightColor);
+    margin: 0;
+}
 
+#sideBarAllTodos:hover{
+    background-color: var(--backgroundColor);
+}
 
 .projectDiv{
     padding: 5px 15px;
@@ -147,18 +156,69 @@ html,body{
 
 .projectDiv:hover{
     background-color: var(--backgroundColor);
+
 }
 
-.projectTitleDiv{
-    
+#addNewProjectButton{
+    padding: 5px 15px;
+    color: var(--highlightColor);
 }
+
+#addNewProjectButton:hover{
+    background-color: var(--backgroundColor);
+}
+
+
+
+.newProjectTitleEditInput{
+    font-size: 2rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+.newProjectTitleEditInput:empty::before {
+    content: 'Enter a Project Title';
+    display: inline-block;
+}
+
+.newProjectTitleEditInput:empty:focus::before {
+    content: 'Enter a Project Title';
+    display: inline-block;
+}
+
 
 .projectTitle{
     color: var(--highlightColor);
     margin: 0;
 }
 
+.projectTitleWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
 
+}
+
+.addNewTodoButton{
+    display: flex;
+    color: var(--highlightColor);
+    border: 2px solid var(--highlightColor);
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.addNewTodoButton:hover{
+    background-color: var(--highlightColor);
+    color: var(--backgroundColor);
+    border: 2px solid var(--backgroundColor);
+}
 
 
 #contentDiv{
@@ -166,18 +226,41 @@ html,body{
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-}
-
-#todoList{
-    width: 100%;
-    height: 100%;
     overflow: scroll;
 }
 
-#projectTitle{
+.todoList{
+    width: 100%;
+}
+
+.contentProjectTitle{
     color: var(--highlightColor);
     font-size: 2rem;
-    padding: 15px;
+}
+
+.projectTitleEditInput{
+    font-size: 2rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+.projectTitleEditIconImg{
+    display: inline;
+    margin: 0 0.125em;
+    margin-left: 5px;
+    padding: 0;
+    vertical-align: baseline;
+    width: 1.5rem;
+    filter: invert();
+}
+
+.contentAllTitle{
+    color: var(--highlightColor);
+    font-size: 2.5rem;
+    font-weight: bold;
 }
 
 .todoDiv{
@@ -208,10 +291,6 @@ html,body{
     color: var(--middleColor);
 }
 
-
-
-
-
 .editIconImg{
     display: inline;
     margin: 0 0.125em;
@@ -220,6 +299,7 @@ html,body{
     vertical-align: baseline;
     width: 1.5rem;
 }
+
 
 
 .todoContentDiv{
@@ -302,3 +382,85 @@ html,body{
     font-size: 1.2rem;
 }
 
+#newtodoDiv{
+    margin-left: 5px;
+    flex-grow: 1;
+    font-size: 1.5rem;
+    display: flex;
+    width: 100%;
+}
+
+#newTodoEditInput{
+    font-size: 1.5rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+#newTodoEditInput:empty::before {
+    content: 'New Todo';
+    display: inline-block;
+    color: var(--middleColor);
+
+}
+
+#newTodoEditInput:empty:focus::before {
+    content: 'New Todo';
+    display: inline-block;
+    color: var(--middleColor);
+}
+
+.deleteTodoButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: var(--highlightColor);
+    width: fit-content;
+    padding: 10px 15px;
+    border-radius: 30px;
+    align-self: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.deleteButtonImg{
+    filter: invert();
+}
+
+.deleteChoicesWrapper{
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.deleteProjectButton{
+    display: flex;
+    color: var(--highlightColor);
+    border: 2px solid var(--highlightColor);
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;  
+    margin-right: -10px;
+}
+
+.deleteProjectButton:hover{
+    background-color: var(--highlightColor);
+    color: var(--backgroundColor);
+    border: 2px solid var(--backgroundColor);
+
+    .deleteButtonImg{
+        filter: none;
+    }
+}
+
+#confirmDelete{
+    color: var(--highlightColor);
+    margin-left: 5px;
+    margin-right: -5px;
+}

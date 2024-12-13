@@ -11,8 +11,8 @@ export const controller = (function(){
         }
 
         const projects = model.getAllProjects();
-        const defaultTodos = model.getDefaultProject().getAllTodos();
-        view.renderUI(user, projects, defaultTodos, handlerFunctions);
+        const defaultProjectID = model.getDefaultProject().getID();
+        view.renderUI(user, projects, defaultProjectID, handlerFunctions);
     }
 
 

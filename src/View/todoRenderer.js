@@ -1,7 +1,8 @@
 import editIcon from "../assets/img/pencil.svg";
-import checkIcon from"../assets/img/check-bold.svg";
+import checkIcon from "../assets/img/check-bold.svg";
+import trashIcon from "../assets/img/trash-can.svg";
 
-export const renderTodo = (todo, contentHandler) => {
+export const renderTodo = (todo, projectID, contentHandlers) => {
     const todoDiv = document.createElement("div");
     todoDiv.classList = "todoDiv";
 
@@ -12,7 +13,7 @@ export const renderTodo = (todo, contentHandler) => {
     doneToggle.setAttribute("type", "checkbox");
     doneToggle.checked = todo.getDone();
     doneToggle.addEventListener("click", () => {
-        const handler = contentHandler.checkboxHandler()
+        const handler = contentHandlers.checkboxHandler()
         handler(todo);
     });
 
@@ -50,7 +51,7 @@ export const renderTodo = (todo, contentHandler) => {
             const input = titleEditInput.textContent;
             console.log(input);
 
-            const handler = contentHandler.todoTitleEditHandler()
+            const handler = contentHandlers.todoTitleEditHandler()
             handler(todo, input);
 
             todoTitleDiv.innerHTML = "";
@@ -115,7 +116,7 @@ export const renderTodo = (todo, contentHandler) => {
         checkIconImg.src = checkIcon;
         checkIconImg.addEventListener("click", () =>{
             const input = descriptionEditInput.textContent;
-            const handler = contentHandler.todoDescriptionEditHandler()
+            const handler = contentHandlers.todoDescriptionEditHandler()
             handler(todo, input);
 
             descriptionDiv.textContent = todo.getDescription();
@@ -165,7 +166,7 @@ export const renderTodo = (todo, contentHandler) => {
         checkIconImg.addEventListener("click", () =>{
             const input = dueDateEditInput.value;
             console.log(input);
-            const handler = contentHandler.todoDueDateEditHandler()
+            const handler = contentHandlers.todoDueDateEditHandler()
             handler(todo, input);
 
             let date = todo.getDueDate();
@@ -257,7 +258,7 @@ export const renderTodo = (todo, contentHandler) => {
         checkIconImg.addEventListener("click", () =>{
             todoTitleDiv.addEventListener("click", toggleOpen);
 
-            const handler = contentHandler.todoPriorityEditHandler()
+            const handler = contentHandlers.todoPriorityEditHandler()
             handler(todo, priorityLevel);
 
             renderPriorities(todo.getPriority());
@@ -304,7 +305,7 @@ export const renderTodo = (todo, contentHandler) => {
         checkIconImg.src = checkIcon;
         checkIconImg.addEventListener("click", () =>{
             const input = notesEditInput.textContent;
-            const handler = contentHandler.todoNotesEditHandler()
+            const handler = contentHandlers.todoNotesEditHandler()
             handler(todo, input);
 
             notesDiv.textContent = todo.getNotes();
@@ -325,6 +326,43 @@ export const renderTodo = (todo, contentHandler) => {
     todoContentDiv.appendChild(dueDateWrapper);
     todoContentDiv.appendChild(priorityWrapper);
     todoContentDiv.appendChild(notesWrapper);
+
+    const deleteTodoButton = document.createElement("div");
+    deleteTodoButton.className = "deleteTodoButton";
+    deleteTodoButton.textContent = "Delete";
+    const deleteButtonImg = document.createElement("img");
+    deleteButtonImg.classList = "editIconImg";
+    deleteButtonImg.classList += " deleteButtonImg"
+    deleteButtonImg.src = trashIcon;
+    deleteTodoButton.appendChild(deleteButtonImg);
+
+    todoContentDiv.appendChild(deleteTodoButton);
+
+    deleteTodoButton.addEventListener("click", ()=>{
+        deleteTodoButton.remove();
+        const deleteChoicesWrapper = document.createElement("div");
+        deleteChoicesWrapper.className = "deleteChoicesWrapper";
+        const yesButton = document.createElement("div");
+        yesButton.textContent = "Yes";
+        yesButton.classList = "deleteTodoButton";
+        const noButton = document.createElement("div");
+        noButton.textContent = "No";
+        noButton.classList = "deleteTodoButton";
+
+        deleteChoicesWrapper.appendChild(noButton);
+        deleteChoicesWrapper.appendChild(yesButton);
+        todoContentDiv.appendChild(deleteChoicesWrapper);
+
+        noButton.addEventListener("click", () =>{
+            deleteChoicesWrapper.remove();
+            todoContentDiv.appendChild(deleteTodoButton);
+        });
+
+        yesButton.addEventListener("click", ()=>{
+            const handler = contentHandlers.deleteTodoHandler;
+            handler(projectID, todo.getID());
+        });
+    });
 
     todoDiv.appendChild(todoContentDiv);
     

@@ -45,12 +45,18 @@ export const model = (function(){
     }
 
     const addTodoToProject =  (projectID, title, description, dueDate, priority, notes) => {
+        console.log(projectID);
         const project = getProjectByID(projectID);
         const newTodoID = project.addTodo(title, description, dueDate, priority, notes);
         return {projectID, newTodoID};
     }
 
     const deleteTodoInProject = (projectID, todoID) => {
+        const project = getProjectByID(projectID);
+        console.log("works");
+        console.log(projectID);
+        console.log(defaultProject.getID());
+
         getProjectByID(projectID).deleteTodo(todoID);
     }
 

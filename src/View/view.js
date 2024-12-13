@@ -1,5 +1,7 @@
 import { projectRenderer } from "./projectRenderer";
 import { getHeaderDiv, getSidebarDiv, getContentDiv} from "./UIELements";
+import editIcon from "../assets/img/pencil.svg";
+import checkIcon from"../assets/img/check-bold.svg";
 
 export const view =(function () {
 
@@ -9,7 +11,7 @@ export const view =(function () {
     headerDiv.id = "headerDiv";
     appDiv.appendChild(headerDiv);
 
-    const contentDiv = document.createElement("div");
+    let contentDiv = document.createElement("div");
     contentDiv.id = "contentDiv";
     contentDiv.classList = "contentDiv";
     appDiv.appendChild(contentDiv);
@@ -18,19 +20,7 @@ export const view =(function () {
     sideBarDiv.id = "sideBarDiv";
     sideBarDiv.classList = "sideBarDiv";
 
-    const sideBarTitle = document.createElement("div");
-    sideBarTitle.id = "sideBarTitle";
-    sideBarTitle.textContent="Projects"
-    sideBarDiv.appendChild(sideBarTitle);
-
-    const sideBarButton = document.createElement("div");
-    sideBarButton.id = "sideBarButton";
-    sideBarButton.textContent = ">"
-    sideBarButton.addEventListener("click", () =>{
-        sideBarButton.textContent = sideBarButton.textContent == ">" ? sideBarButton.textContent = "<" : sideBarButton.textContent = ">";
-        sideBarDiv.classList.toggle("open");
-    });
-    sideBarTitle.appendChild(sideBarButton);
+    
 
     const SBCWrapper = document.createElement("div");
     SBCWrapper.id = "SBCWrapper";
@@ -46,20 +36,29 @@ export const view =(function () {
     contentDiv.classList += " redBox"
 
 
-    const renderUI = (user, projects, defaultTodos, handlerFunctions) => {
+    const renderUI = (user, projects, defaultProjectID, handlerFunctions) => {
         headerDiv.appendChild(getHeaderDiv(user));
-        sideBarDiv.appendChild(getSidebarDiv(projects, handlerFunctions.projectHandler()));
+        sideBarDiv.appendChild(getSidebarDiv(projects, defaultProjectID, handlerFunctions.sideBarHandlers()));
         const contentHandlers = handlerFunctions.contentHandlers();
-        contentDiv.appendChild(getContentDiv(defaultTodos, contentHandlers));
+        renderAll(projects, defaultProjectID, contentHandlers);
     }
 
-    const renderTodos = (projectTitle, todos, handlerFunctions) =>{
+    const renderTodos = (project, defaultID, handlerFunctions) =>{
         contentDiv.innerHTML = "";
-        const title = document.createElement("div");
-        title.id = "projectTitle";
-        title.textContent = projectTitle;
-        contentDiv.appendChild(title);
-        contentDiv.appendChild(getContentDiv(todos, handlerFunctions));
+        contentDiv.append(getContentDiv(project, defaultID, handlerFunctions));
+    }
+
+    const updateSideBar = (projects, defaultProjectID, sideBarHandlers) =>{
+        sideBarDiv.innerHTML = "";
+        sideBarDiv.appendChild(getSidebarDiv(projects, defaultProjectID, sideBarHandlers));
+    }
+
+    const renderAll = (projects, defaultID, contentHandlers)=>{
+        contentDiv.innerHTML = "";
+        projects.forEach(project =>{
+            contentDiv.appendChild(getContentDiv(project, defaultID, contentHandlers));
+        });
+
     }
 
     const showAllTodosInAllProjects = () => {
@@ -85,6 +84,13 @@ export const view =(function () {
         return projectListDiv;
     }
 
-    return {renderUI, showAllTodosInAllProjects, showAllProjects, renderTodos};
+    return {
+        renderUI, 
+        showAllTodosInAllProjects, 
+        showAllProjects, 
+        renderTodos, 
+        renderAll,
+        updateSideBar
+    };
 
 })();
