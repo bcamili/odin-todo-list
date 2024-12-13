@@ -1,8 +1,14 @@
 html{
-    --backgroundColor: #303030;
+/*    --backgroundColor: #303030;
     --darkColor: #000000;
     --middleColor: #808080;
     --highlightColor: #FFFFFF;
+*/
+    --backgroundColor: #322C2B;
+    --darkColor: #322C2B;
+    --middleColor: hsl(10, 35%, 32%);
+    --highlightColorMuted: hsl(33, 56%, 75%);
+    --highlightColor: hsl(33, 56%, 85%);
 
     font-family: "Nunito";
     font-size: 12px;
@@ -70,7 +76,7 @@ html,body{
 #sideBarDiv{
     float: left;
     min-width: 33%;
-    background-color: var(--middleColor);
+    background: linear-gradient(0deg, var(--backgroundColor) 20%, var(--middleColor) 100%);
     padding-top: 10px;
 }
 
@@ -176,7 +182,10 @@ html,body{
     border: none;
     font-family: inherit;
     flex-grow: 1;
-    color: var(--middleColor);
+    border: 2px solid var(--highlightColorMuted);
+    color: var(--highlightColorMuted);
+    border-radius: 5px;
+    padding: 0px 10px;
 }
 
 .newProjectTitleEditInput:empty::before {
@@ -240,23 +249,38 @@ html,body{
 
 .projectTitleEditInput{
     font-size: 2rem;
-    padding: 0;
+    padding: 0px 10px;
     border: none;
     font-family: inherit;
     flex-grow: 1;
-    color: var(--middleColor);
+    border: 2px solid var(--highlightColorMuted);
+    color: var(--highlightColorMuted);
+    border-radius: 5px;
 }
 
 .projectTitleEditIconImg{
-    display: inline;
+    display: inline-flex;
     margin: 0 0.125em;
     margin-left: 5px;
     padding: 0;
     vertical-align: baseline;
     width: 1.5rem;
-    filter: invert();
+    height: 1.5rem;
+    background-color: var(--highlightColor);
+    mask-image: url(./assets/img/pencil.svg);
 }
 
+.projectTitleSaveIconImg{
+    display: inline-flex;
+    margin: 0 0.125em;
+    margin-left: 5px;
+    padding: 0;
+    vertical-align: baseline;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--highlightColor);
+    mask-image: url(./assets/img/check-bold.svg);
+}
 .contentAllTitle{
     color: var(--highlightColor);
     font-size: 2.5rem;
@@ -269,6 +293,7 @@ html,body{
     padding: 10px;
     margin: 5px;
     border-radius: 10px;
+
  }
 
 .todoHeader{
@@ -310,12 +335,16 @@ html,body{
     transition: 0.3s ease;
     gap: 5px;
     overflow: hidden;
+    border: none;
+
+    border-radius: 10px;
 }
 
 .todoContentDiv.open{
     max-height: 500px;
     padding-top: 10px;
     padding-bottom: 10px;
+   
 }
 
 .contentEditInput{
@@ -339,6 +368,10 @@ html,body{
 
 .dueDateDiv{
     font-size: 1.2rem;
+
+    input{
+        background-color: var(--highlightColor);
+    }
 }
 
 .priorityDiv{
@@ -355,7 +388,7 @@ html,body{
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: var(--darkColor);
+        background-color: var(--backgroundColor);
         width: 15px;
         height: 15px;
         border-radius: 30px;
@@ -416,7 +449,7 @@ html,body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
+    background-color: var(--backgroundColor);
     color: var(--highlightColor);
     width: fit-content;
     padding: 10px 15px;
@@ -424,10 +457,23 @@ html,body{
     align-self: center;
     font-size: 1.2rem;
     font-weight: bold;
+    margin-top: 20px;
 }
 
 .deleteButtonImg{
-    filter: invert();
+    mask-image: url("./assets/img/trash-can.svg");
+    background-color: var(--highlightColor);
+    height: 1.5rem;
+ 
+}
+
+.confirmDeleteTodo{
+    color: var(--backgroundColor);
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .deleteChoicesWrapper{
@@ -455,7 +501,7 @@ html,body{
     border: 2px solid var(--backgroundColor);
 
     .deleteButtonImg{
-        filter: none;
+        background-color: var(--backgroundColor);
     }
 }
 
@@ -463,4 +509,32 @@ html,body{
     color: var(--highlightColor);
     margin-left: 5px;
     margin-right: -5px;
+    
 }
+
+.doneToggle{
+    appearance: none;
+    font: inherit;
+    color: var(--backgroundColor);
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border: 0.15em solid var(--backgroundColor);
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+
+.doneToggle::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--backgroundColor);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  input[type="checkbox"]:checked::before {
+    transform: scale(2);
+  }

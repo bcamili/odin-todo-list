@@ -77,8 +77,8 @@ export const getSidebarDiv = (projects, defaultProjectID, sideBarHandlers) => {
         projectTitleEditInput.textContent = "";
         projectTitleEditInput.autofocus = true;       
 
-        const checkIconImg = document.createElement("img");
-        checkIconImg.classList = "projectTitleEditIconImg";
+        const checkIconImg = document.createElement("div");
+        checkIconImg.classList = "projectTitleSaveIconImg";
         checkIconImg.src = checkIcon;
         checkIconImg.addEventListener("click", () =>{
             const input = projectTitleEditInput.textContent;
@@ -110,9 +110,9 @@ export const getContentDiv = (project, defaultID, contentHandlers) => {
         title.className = "contentProjectTitle";
         title.textContent = project.getTitle();
 
-        const projectTitleEditIconImg = document.createElement("img");
+        const projectTitleEditIconImg = document.createElement("div");
         projectTitleEditIconImg.classList = "projectTitleEditIconImg";
-        projectTitleEditIconImg.src = editIcon;
+        //projectTitleEditIconImg.src = editIcon;
         projectTitleEditIconImg.addEventListener("click", () =>{
             title.innerHTML = "";
             
@@ -124,15 +124,18 @@ export const getContentDiv = (project, defaultID, contentHandlers) => {
             projectTitleEditInput.textContent = project.getTitle();            
 
             const checkIconImg = document.createElement("img");
-            checkIconImg.classList = "projectTitleEditIconImg";
-            checkIconImg.src = checkIcon;
+            checkIconImg.classList = "projectTitleSaveIconImg";
+            //checkIconImg.src = checkIcon;
             checkIconImg.addEventListener("click", () =>{
                 const input = projectTitleEditInput.textContent;
-                const handler = contentHandlers.projectTitleEditHandler()
-                handler(project, input);
+                if(input.length!=0){
 
-                title.textContent = project.getTitle();
-                title.appendChild(projectTitleEditIconImg);
+                    const handler = contentHandlers.projectTitleEditHandler()
+                    handler(project, input);
+                    
+                    title.textContent = project.getTitle();
+                    title.appendChild(projectTitleEditIconImg);
+                }
             });
             
             title.appendChild(projectTitleEditInput);
@@ -194,10 +197,10 @@ export const getContentDiv = (project, defaultID, contentHandlers) => {
     const deleteProjectButton = document.createElement("div");
     deleteProjectButton.className = "deleteProjectButton";
     deleteProjectButton.textContent = "Delete";
-    const deleteButtonImg = document.createElement("img");
+    const deleteButtonImg = document.createElement("div");
     deleteButtonImg.classList = "editIconImg";
     deleteButtonImg.classList += " deleteButtonImg"
-    deleteButtonImg.src = trashIcon;
+    //deleteButtonImg.src = trashIcon;
     deleteProjectButton.appendChild(deleteButtonImg);
     
     deleteProjectButton.addEventListener("click", () =>{

@@ -330,10 +330,10 @@ export const renderTodo = (todo, projectID, contentHandlers) => {
     const deleteTodoButton = document.createElement("div");
     deleteTodoButton.className = "deleteTodoButton";
     deleteTodoButton.textContent = "Delete";
-    const deleteButtonImg = document.createElement("img");
+    const deleteButtonImg = document.createElement("div");
     deleteButtonImg.classList = "editIconImg";
     deleteButtonImg.classList += " deleteButtonImg"
-    deleteButtonImg.src = trashIcon;
+    //deleteButtonImg.src = trashIcon;
     deleteTodoButton.appendChild(deleteButtonImg);
 
     todoContentDiv.appendChild(deleteTodoButton);
@@ -349,7 +349,12 @@ export const renderTodo = (todo, projectID, contentHandlers) => {
         noButton.textContent = "No";
         noButton.classList = "deleteTodoButton";
 
+        const confirmDelete = document.createElement("div");
+        confirmDelete.className = "confirmDeleteTodo";
+        confirmDelete.textContent = "Really?";
+
         deleteChoicesWrapper.appendChild(noButton);
+        deleteChoicesWrapper.appendChild(confirmDelete);
         deleteChoicesWrapper.appendChild(yesButton);
         todoContentDiv.appendChild(deleteChoicesWrapper);
 
