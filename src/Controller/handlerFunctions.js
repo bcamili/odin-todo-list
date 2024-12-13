@@ -1,4 +1,4 @@
-export const handlerFunctionsFactory = (function (model, view){
+export const handlerFunctionsFactory = (function (model, view, storage){
     
     const sideBarHandlers = () =>{ 
 
@@ -26,6 +26,7 @@ export const handlerFunctionsFactory = (function (model, view){
         const projectTitleEditHandler = (project, input) =>{
             const returnHandler = (project, input) => {
                 model.editProject(project.getID(), input);
+                storage.update(model);
                 updateSideBar();
             }
 
@@ -36,6 +37,7 @@ export const handlerFunctionsFactory = (function (model, view){
 
             const returnHandler = (todo) => {
                 todo.toggleDone();
+                storage.update(model);
             }
 
             return returnHandler;
@@ -44,6 +46,7 @@ export const handlerFunctionsFactory = (function (model, view){
         const todoTitleEditHandler = (todo, input) =>{
             const returnHandler = (todo, input) => {
                 todo.editTodo.title(input);
+                storage.update(model);
             }
 
             return returnHandler;
@@ -52,6 +55,7 @@ export const handlerFunctionsFactory = (function (model, view){
         const todoDescriptionEditHandler = (todo, input) =>{
             const returnHandler = (todo, input) => {
                 todo.editTodo.description(input);
+                storage.update(model);
             }
 
             return returnHandler;
@@ -60,6 +64,7 @@ export const handlerFunctionsFactory = (function (model, view){
         const todoNotesEditHandler = (todo, input) =>{
             const returnHandler = (todo, input) => {
                 todo.editTodo.notes(input);
+                storage.update(model);
             }
 
             return returnHandler;
@@ -68,9 +73,8 @@ export const handlerFunctionsFactory = (function (model, view){
         const todoDueDateEditHandler = (todo, input) =>{
             const returnHandler = (todo, input) => {
                 const date = new Date(input);
-                console.log(input);
-                console.log(date);
                 todo.editTodo.dueDate(date);
+                storage.update(model);
             }
 
             return returnHandler;
@@ -79,6 +83,7 @@ export const handlerFunctionsFactory = (function (model, view){
         const todoPriorityEditHandler = (todo, input) =>{
             const returnHandler = (todo, input) => {
                 todo.editTodo.priority(input);
+                storage.update(model);
             }
 
             return returnHandler;
@@ -86,8 +91,8 @@ export const handlerFunctionsFactory = (function (model, view){
 
         
         const addTodoToProject = (projectID, title, description, dueDate, priority, notes) =>{
-            console.log("works")
             model.addTodoToProject(projectID, title, description, dueDate, priority, notes);
+            storage.update(model);
             const project = model.getProjectByID(projectID);
             if(project === model.getDefaultProject()){
                 sideBarHandlers().allTodosHandler();
@@ -98,6 +103,7 @@ export const handlerFunctionsFactory = (function (model, view){
 
         const deleteTodoHandler = (projectID, todoID) =>{+
             model.deleteTodoInProject(projectID, todoID);
+            storage.update(model);
             const project = model.getProjectByID(projectID);
             if(project === model.getDefaultProject()){
                 sideBarHandlers().allTodosHandler();
@@ -108,6 +114,7 @@ export const handlerFunctionsFactory = (function (model, view){
 
         const deleteProjectHandler = (projectID) => {
             model.deleteProject(projectID);
+            storage.update(model);
             updateSideBar();
             sideBarHandlers().allTodosHandler();
         }

@@ -3,9 +3,11 @@ import { createProject } from "./projects";
 export const model = (function(){
     const projects = [];
 
-    const defaultProject = createProject("default");
+    let defaultProject = createProject("default");
     projects.push(defaultProject);
-    const todoID = defaultProject.addTodo("Test3Test3Test3Test3Test3Test3Test3Test3Test3Test3Test3Test3", "test3", new Date(), 4, "-needs testing3");
+    
+    
+    /* const todoID = defaultProject.addTodo("Test3Test3Test3Test3Test3Test3Test3Test3Test3Test3Test3Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 3, "-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 2, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
@@ -24,7 +26,7 @@ export const model = (function(){
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.addTodo("Test3", "test3", new Date(), 4, "-needs testing3");
     defaultProject.toggleTodo(todoID);
-
+    */
     const getAllProjects = () => projects;
 
     const getDefaultProject = () => defaultProject;
@@ -45,7 +47,6 @@ export const model = (function(){
     }
 
     const addTodoToProject =  (projectID, title, description, dueDate, priority, notes) => {
-        console.log(projectID);
         const project = getProjectByID(projectID);
         const newTodoID = project.addTodo(title, description, dueDate, priority, notes);
         return {projectID, newTodoID};
@@ -53,9 +54,6 @@ export const model = (function(){
 
     const deleteTodoInProject = (projectID, todoID) => {
         const project = getProjectByID(projectID);
-        console.log("works");
-        console.log(projectID);
-        console.log(defaultProject.getID());
 
         getProjectByID(projectID).deleteTodo(todoID);
     }
@@ -83,6 +81,37 @@ export const model = (function(){
         }
     }
 
+    const getModelJSON = () => {
+
+        const projectsArray = [];
+        projects.forEach(project => {
+            projectsArray.push(project.getProjectJSON());
+        });
+
+        const modelJSON = {
+            projects: projectsArray
+        }
+
+
+        return JSON.stringify(modelJSON);
+    }
+
+    const loadModelfromJSON = (modelJSON) => {
+
+        projects.length = 0;
+        const projectsFromJSON = JSON.parse(modelJSON);
+
+        projectsFromJSON.projects.forEach(projectJSON => {
+            const projectFromJSON = JSON.parse(projectJSON);
+            const project = createProject(projectFromJSON.title);
+            project.loadFromJSON(projectFromJSON.todoList);
+            if(projects.length == 0){
+                defaultProject = project;
+            }
+            projects.push(project);
+        });
+    }
+
     return {
         getAllProjects, 
         getDefaultProject, 
@@ -94,6 +123,8 @@ export const model = (function(){
         addTodoToProject, 
         toggleTodoInProject, 
         editTodoInProject, 
-        deleteTodoInProject
+        deleteTodoInProject,
+        getModelJSON,
+        loadModelfromJSON
     };
 })();
