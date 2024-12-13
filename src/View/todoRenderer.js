@@ -49,7 +49,6 @@ export const renderTodo = (todo, projectID, contentHandlers) => {
         checkIconImg.src = checkIcon;
         checkIconImg.addEventListener("click", () =>{
             const input = titleEditInput.textContent;
-            console.log(input);
 
             const handler = contentHandlers.todoTitleEditHandler()
             handler(todo, input);
@@ -165,7 +164,6 @@ export const renderTodo = (todo, projectID, contentHandlers) => {
         checkIconImg.src = checkIcon;
         checkIconImg.addEventListener("click", () =>{
             const input = dueDateEditInput.value;
-            console.log(input);
             const handler = contentHandlers.todoDueDateEditHandler()
             handler(todo, input);
 

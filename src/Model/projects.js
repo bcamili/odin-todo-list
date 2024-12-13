@@ -14,7 +14,7 @@ export const createProject = (projectTitle) => {
     const getAllTodos = () => todoList;
 
     const addTodo = (title, description, dueDate, priority, notes) => {
-        const newTodo = createTodo(id, title, description, dueDate, priority, notes);
+        const newTodo = createTodo(id, title, description, dueDate, priority, notes, false);
         todoList.push(newTodo);
         return newTodo.getID();
     }
@@ -45,5 +45,40 @@ export const createProject = (projectTitle) => {
         }
     }
 
-    return {getID, getTitle, setTitle, getAllTodos, addTodo, toggleTodo, printProject, getTodoByID, deleteTodo};
+    const getProjectJSON = () => {
+        const todos = [];
+        todoList.forEach(todo =>{
+            todos.push(todo.getTodoJSON());
+        });
+
+        const project = {
+            id: `${id}`,
+            title: `${projectTitle}`,
+            todoList: todos
+        }
+
+        return JSON.stringify(project);
+    }
+
+    const loadFromJSON = (todoListJSON) =>{
+        todoListJSON.forEach(todoJSON => {
+            const todoFromJSON = JSON.parse(todoJSON);
+            const todo = createTodo(id, todoFromJSON.title, todoFromJSON.description, new Date(todoFromJSON.dueDate), todoFromJSON.priority, todoFromJSON.notes, JSON.parse(todoFromJSON.done));
+            todoList.push(todo);
+        });
+    }
+
+    return {
+        getID, 
+        getTitle, 
+        setTitle, 
+        getAllTodos, 
+        addTodo, 
+        toggleTodo, 
+        printProject, 
+        getTodoByID, 
+        deleteTodo, 
+        getProjectJSON,
+        loadFromJSON
+    };
 }

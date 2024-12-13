@@ -5,6 +5,8 @@ import checkIcon from"../assets/img/check-bold.svg";
 
 export const view =(function () {
 
+    console.log(document.querySelector("html").requestFullscreen());
+
     const appDiv = document.getElementById("app");
 
     const headerDiv = document.createElement("div");

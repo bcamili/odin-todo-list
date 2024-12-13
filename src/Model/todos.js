@@ -1,12 +1,12 @@
-export const createTodo = (projectID, title, description, dueDate, priority, notes) => {
+export const createTodo = (projectID, title, description, dueDate, priority, notes, done) => {
     
     const id = String(Math.floor(Math.random()*1000000000))
     
     const getID = () => id;
 
-    let done = false;
-    const getDone = () => done;
-    const toggleDone = () => done = done == false;
+    let isDone = done;
+    const getDone = () => isDone;
+    const toggleDone = () => {isDone = isDone == false;}
     const getProjectID = () => projectID;
     const getTitle = () =>  title;
     const getDescription = () =>  description;
@@ -42,6 +42,20 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
             `);
     }
 
+    const getTodoJSON = () => {
+        const todo = {
+            id: `${id}`,
+            title: `${title}`,
+            description: `${description}`,
+            dueDate: `${dueDate}`,
+            priority: `${priority}`,
+            notes: `${notes}`,
+            done: `${isDone}`
+        }
+
+        return JSON.stringify(todo);
+    }
+
     const getMonthName = (month) =>{
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         return months[month];
@@ -52,5 +66,18 @@ export const createTodo = (projectID, title, description, dueDate, priority, not
         return days[day];
     }
 
-    return {getID, getDone, toggleDone, getProjectID, getTitle, getDescription, getDueDate, getPriority, getNotes, printTodo, editTodo};
+    return {
+        getID, 
+        getDone, 
+        toggleDone, 
+        getProjectID, 
+        getTitle, 
+        getDescription, 
+        getDueDate, 
+        getPriority, 
+        getNotes, 
+        printTodo, 
+        editTodo, 
+        getTodoJSON
+    };
 }

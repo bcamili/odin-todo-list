@@ -79,7 +79,7 @@ export const getSidebarDiv = (projects, defaultProjectID, sideBarHandlers) => {
 
         const checkIconImg = document.createElement("div");
         checkIconImg.classList = "projectTitleSaveIconImg";
-        checkIconImg.src = checkIcon;
+        //checkIconImg.src = checkIcon;
         checkIconImg.addEventListener("click", () =>{
             const input = projectTitleEditInput.textContent;
             if(input.length != 0){
@@ -183,7 +183,6 @@ export const getContentDiv = (project, defaultID, contentHandlers) => {
                 const priority = "";
                 const notes = "";
                 const handler = contentHandlers.addTodoToProject;
-                console.log(handler);
                 handler(projectID, title, description, new Date(), 1, notes);
             }
 
