@@ -1,48 +1,45 @@
-import { projectHandler } from "./projectHandler";
+import "./style.css";
+import { controller } from "./Controller/controller";
+import { model } from "./Model/model";
+
 
 //Getting all Projects and Todos
-projectHandler.printAllProjects();
+model.printAllProjects();
 
 //Adding new Project
-const project1ID = projectHandler.addProject("My First Project");
-projectHandler.printAllProjects();
+const project1ID = model.addProject("My First Project");
+model.printAllProjects();
 
 //Adding new Todo
-const toEditID = projectHandler.addTodoToProject(project1ID,"Test", "test", new Date(), 4, "-needs testing");
-projectHandler.printAllProjects();
-projectHandler.addTodoToProject(project1ID,"Test2", "test2", new Date(), 4, "-needs testing2");
-projectHandler.printAllProjects();
+const toEditID = model.addTodoToProject(project1ID,"Test", "test", new Date(), 4, "-needs testing");
+model.printAllProjects();
+model.addTodoToProject(project1ID,"Test2", "test2", new Date(), 4, "-needs testing2");
+model.printAllProjects();
 
-const project2ID = projectHandler.addProject("My Second Project");
-projectHandler.printAllProjects();
-const {newTodoID} = projectHandler.addTodoToProject(project2ID,"Test3", "test3", new Date(), 4, "-needs testing3");
-projectHandler.printAllProjects();
-projectHandler.addTodoToProject(project2ID, "Test4", "test4", new Date(), 4, "-needs testing4");
-projectHandler.printAllProjects();
+const project2ID = model.addProject("My Second Project");
+model.printAllProjects();
+const {newTodoID} = model.addTodoToProject(project2ID,"Test3", "test3", new Date(), 4, "-needs testing3");
+model.printAllProjects();
+model.addTodoToProject(project2ID, "Test4", "test4", new Date(), 4, "-needs testing4");
+model.printAllProjects();
 
 //Delete a Todo
-projectHandler.deleteTodoInProject(project2ID, newTodoID);
-projectHandler.printAllProjects();
+//projectHandler.deleteTodoInProject(project2ID, newTodoID);
+//projectHandler.printAllProjects();
 
 //Edit a Todo
-projectHandler.editTodoInProject(toEditID.projectID, toEditID.newTodoID, {description: "Edited", title: "Edited Title", notes: "does it?"});
-projectHandler.printAllProjects();
+model.editTodoInProject(toEditID.projectID, toEditID.newTodoID, {description: "Edited", title: "Edited Title", notes: "does it?"});
+model.printAllProjects();
 
 //Edit a Project
-projectHandler.editProject(project2ID,"My Edited Project");
-projectHandler.printAllProjects();
+model.editProject(project2ID,"My Edited Project");
+model.printAllProjects();
 
 //Delete a Project
-projectHandler.deleteProject(project1ID);
-projectHandler.printAllProjects();
+//projectHandler.deleteProject(project1ID);
+//projectHandler.printAllProjects();
 
+//todoApp.showAllProjects();
+//todoApp.showAllTodosInAllProjects();
 
-const button = document.createElement("button");
-document.getElementById("content").appendChild(button);
-button.addEventListener("click", function (e) {
-    const projectID = prompt();
-
-    const todoID = prompt();
-
-    projectHandler.getProjectByID(projectID).getTodoByID(todoID).printTodo();
-});
+controller.init();

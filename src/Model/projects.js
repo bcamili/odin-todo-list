@@ -19,6 +19,10 @@ export const createProject = (projectTitle) => {
         return newTodo.getID();
     }
 
+    const toggleTodo = (todoID) => {
+        getTodoByID(todoID).toggleDone();
+    }
+
     const printProject = () => {
         console.log(`
             Title: ${projectTitle}
@@ -41,5 +45,5 @@ export const createProject = (projectTitle) => {
         }
     }
 
-    return {getID, getTitle, setTitle, getAllTodos, addTodo, printProject, getTodoByID, deleteTodo};
+    return {getID, getTitle, setTitle, getAllTodos, addTodo, toggleTodo, printProject, getTodoByID, deleteTodo};
 }

@@ -1,0 +1,540 @@
+html{
+/*    --backgroundColor: #303030;
+    --darkColor: #000000;
+    --middleColor: #808080;
+    --highlightColor: #FFFFFF;
+*/
+    --backgroundColor: #322C2B;
+    --darkColor: #322C2B;
+    --middleColor: hsl(10, 35%, 32%);
+    --highlightColorMuted: hsl(33, 56%, 75%);
+    --highlightColor: hsl(33, 56%, 85%);
+
+    font-family: "Nunito";
+    font-size: 12px;
+    word-break: break-word;
+}
+
+/* .redBox{
+    border: 1px solid red;
+} */
+
+body{
+    background-color: var(--backgroundColor);
+}
+
+html,body{
+    height: 100%;
+    margin: 0%;
+}
+
+#app{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#SBCWrapper{
+    display: flex;
+    height: calc(100% - 45px);
+}
+
+#headerDiv{
+    background-color: var(--highlightColor);
+}
+
+#header{
+    display: flex;
+    justify-content: space-between;
+}
+
+#logoDiv{
+    color: var(--darkColor);
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+
+}
+
+#usernameDiv{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+}
+
+#username{
+    color: var(--darkColor);
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: right;
+    margin: 0;
+}
+
+#sideBarDiv{
+    float: left;
+    min-width: 33%;
+    background: linear-gradient(0deg, var(--backgroundColor) 20%, var(--middleColor) 100%);
+    padding-top: 10px;
+}
+
+.sideBarDiv{
+    position: relative;
+    transform: translateX(0);
+    transition: margin 0.3s ease;
+}
+
+@media (min-width:690px){
+    #sideBarDiv{
+        min-width: 230px;
+        max-width: 230px;
+    }
+}
+
+@media (max-width: 500px){
+
+    .sideBarDiv {
+  
+        margin-left: calc(-1 * calc(33% - 20px));
+    }
+
+    .sideBarDiv.open{
+ 
+        margin-left: 0px;
+    }
+}
+
+@media (min-width: 500px){
+    #sideBarButton{
+         visibility: hidden;
+     }
+}
+
+#sideBarProjectsTitle{
+    display: flex;
+    font-weight: bold;
+    justify-content: space-between;
+    color: var(--highlightColor);
+    padding: 5px 0px 5px 15px;
+    font-size: 1.2rem;
+    border-bottom:  1px solid var(--backgroundColor);
+}
+
+
+
+#sideBarButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    min-height: 40px;
+    position: absolute;
+    top: 10px;
+    right: -10px;
+    margin: 0px -10px 0px 10px;
+    padding: 0;
+    background-color: var(--darkColor);
+    color: var(--highlightColor);
+    border-radius: 30px;
+    border: 5px solid var(--middleColor);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+
+#sideBarAllTodos{
+    padding: 5px 15px;
+    border-bottom:  1px solid var(--backgroundColor);
+    color: var(--highlightColor);
+    margin: 0;
+}
+
+#sideBarAllTodos:hover{
+    background-color: var(--backgroundColor);
+}
+
+.projectDiv{
+    padding: 5px 15px;
+    border-bottom:  1px solid var(--backgroundColor);
+}
+
+.projectDiv:hover{
+    background-color: var(--backgroundColor);
+
+}
+
+#addNewProjectButton{
+    padding: 5px 15px;
+    color: var(--highlightColor);
+}
+
+#addNewProjectButton:hover{
+    background-color: var(--backgroundColor);
+}
+
+
+
+.newProjectTitleEditInput{
+    font-size: 2rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    border: 2px solid var(--highlightColorMuted);
+    color: var(--highlightColorMuted);
+    border-radius: 5px;
+    padding: 0px 10px;
+}
+
+.newProjectTitleEditInput:empty::before {
+    content: 'Enter a Project Title';
+    display: inline-block;
+}
+
+.newProjectTitleEditInput:empty:focus::before {
+    content: 'Enter a Project Title';
+    display: inline-block;
+}
+
+
+.projectTitle{
+    color: var(--highlightColor);
+    margin: 0;
+}
+
+.projectTitleWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+
+}
+
+.addNewTodoButton{
+    display: flex;
+    color: var(--highlightColor);
+    border: 2px solid var(--highlightColor);
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.addNewTodoButton:hover{
+    background-color: var(--highlightColor);
+    color: var(--backgroundColor);
+    border: 2px solid var(--backgroundColor);
+}
+
+
+#contentDiv{
+    padding: 10px 20px 0px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+.todoList{
+    width: 100%;
+}
+
+.contentProjectTitle{
+    color: var(--highlightColor);
+    font-size: 2rem;
+}
+
+.projectTitleEditInput{
+    font-size: 2rem;
+    padding: 0px 10px;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    border: 2px solid var(--highlightColorMuted);
+    color: var(--highlightColorMuted);
+    border-radius: 5px;
+}
+
+.projectTitleEditIconImg{
+    display: inline-flex;
+    margin: 0 0.125em;
+    margin-left: 5px;
+    padding: 0;
+    vertical-align: baseline;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--highlightColor);
+    mask-image: url(./assets/img/pencil.svg);
+}
+
+.projectTitleSaveIconImg{
+    display: inline-flex;
+    margin: 0 0.125em;
+    margin-left: 5px;
+    padding: 0;
+    vertical-align: baseline;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: var(--highlightColor);
+    mask-image: url(./assets/img/check-bold.svg);
+}
+.contentAllTitle{
+    color: var(--highlightColor);
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.todoDiv{
+    overflow: hidden;
+    background-color: var(--highlightColor);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+
+ }
+
+.todoHeader{
+    display: flex;
+    margin: 0;
+}
+
+.todoTitleDiv{
+    margin-left: 5px;
+    flex-grow: 1;
+    font-size: 1.5rem;
+}
+
+.titleEditInput{
+    font-size: 1.5rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+.editIconImg{
+    display: inline;
+    margin: 0 0.125em;
+    margin-left: 5px;
+    padding: 0;
+    vertical-align: baseline;
+    width: 1.5rem;
+}
+
+
+
+.todoContentDiv{
+    display: flex;
+    flex-direction: column;
+    max-height: 0px;
+    padding: 0px 5px 0px 5px;
+    transition: 0.3s ease;
+    gap: 5px;
+    overflow: hidden;
+    border: none;
+
+    border-radius: 10px;
+}
+
+.todoContentDiv.open{
+    max-height: 500px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+   
+}
+
+.contentEditInput{
+    font-size: 1.2rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+.contentDataTag{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.descriptionDiv{
+    font-size: 1.2rem;
+    width: fit-content;
+}
+
+.dueDateDiv{
+    font-size: 1.2rem;
+
+    input{
+        background-color: var(--highlightColor);
+    }
+}
+
+.priorityDiv{
+    display: flex;
+    font-size: 1.2rem;
+    gap: 5px;
+    align-items: center;
+    
+    .priorityPoints{
+        display: flex;
+    }
+    
+    .priorityPoint{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--backgroundColor);
+        width: 15px;
+        height: 15px;
+        border-radius: 30px;
+        color: var(--highlightColor);
+        font-size: 0.8rem;
+
+    }
+
+    .priorityButtons{
+        font-size: 1.3rem;
+        line-height: 1rem;
+        font-weight: bold;
+        border: 2px solid var(--darkColor);
+        border-radius: 30px;
+        width: 10px;
+        height: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.notesDiv{
+    font-size: 1.2rem;
+}
+
+#newtodoDiv{
+    margin-left: 5px;
+    flex-grow: 1;
+    font-size: 1.5rem;
+    display: flex;
+    width: 100%;
+}
+
+#newTodoEditInput{
+    font-size: 1.5rem;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    flex-grow: 1;
+    color: var(--middleColor);
+}
+
+#newTodoEditInput:empty::before {
+    content: 'New Todo';
+    display: inline-block;
+    color: var(--middleColor);
+
+}
+
+#newTodoEditInput:empty:focus::before {
+    content: 'New Todo';
+    display: inline-block;
+    color: var(--middleColor);
+}
+
+.deleteTodoButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--backgroundColor);
+    color: var(--highlightColor);
+    width: fit-content;
+    padding: 10px 15px;
+    border-radius: 30px;
+    align-self: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.deleteButtonImg{
+    mask-image: url("./assets/img/trash-can.svg");
+    background-color: var(--highlightColor);
+    height: 1.5rem;
+ 
+}
+
+.confirmDeleteTodo{
+    color: var(--backgroundColor);
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.deleteChoicesWrapper{
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.deleteProjectButton{
+    display: flex;
+    color: var(--highlightColor);
+    border: 2px solid var(--highlightColor);
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;  
+    margin-right: -10px;
+}
+
+.deleteProjectButton:hover{
+    background-color: var(--highlightColor);
+    color: var(--backgroundColor);
+    border: 2px solid var(--backgroundColor);
+
+    .deleteButtonImg{
+        background-color: var(--backgroundColor);
+    }
+}
+
+#confirmDelete{
+    color: var(--highlightColor);
+    margin-left: 5px;
+    margin-right: -5px;
+    
+}
+
+.doneToggle{
+    appearance: none;
+    font: inherit;
+    color: var(--backgroundColor);
+    min-width: 1.5rem;
+    height: 1.5rem;
+    border: 0.15em solid var(--backgroundColor);
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+
+.doneToggle::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--backgroundColor);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  }
+
+  input[type="checkbox"]:checked::before {
+    transform: scale(2);
+  }
